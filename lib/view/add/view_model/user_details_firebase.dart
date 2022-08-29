@@ -13,7 +13,27 @@ Future<void> adduserDetails(
       .add({
     'name': name,
     'age': age,
-    'phone number': phonenumber,
+    'number': phonenumber,
+    'place': place,
+    'image': image,
+  });
+}
+
+Future<void> updateuserDetails(
+  String id,
+  String name,
+  String age,
+  String phonenumber,
+  String place,
+  String image,
+) async {
+  final docUs = await FirebaseFirestore.instance
+      .collection(FirebaseAuth.instance.currentUser!.email.toString())
+      .doc(id);
+  docUs.set({
+    'name': name,
+    'age': age.toString(),
+    'number': phonenumber,
     'place': place,
     'image': image,
   });

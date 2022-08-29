@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:one_firebase/controller/auth_provider.dart';
 import 'package:one_firebase/view/add/view_model/image_profile.dart';
@@ -16,13 +20,15 @@ class UpdateScreen extends StatelessWidget {
 
   TextEditingController phoneNumberEditController = TextEditingController();
   TextEditingController placeEditController = TextEditingController();
+  String? imgString;
 
   @override
   Widget build(BuildContext context) {
     nameEditController.text = dataQ['name'];
-    ageEditController.text = dataQ['age'];
-    phoneNumberEditController.text = dataQ['phone number'];
+    ageEditController.text = dataQ['age'].toString();
+    phoneNumberEditController.text = dataQ['number'].toString();
     placeEditController.text = dataQ['place'];
+    imgString = dataQ['image'];
 
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +57,7 @@ class UpdateScreen extends StatelessWidget {
                     ),
                     Center(child:
                         Consumer<AuthProvider>(builder: (context, balue, _) {
-                      return ClipOval(child: imageprofile());
+                      return ClipOval(child: imageUpdateprofile());
                     })),
                     const SizedBox(
                       height: 40,
@@ -166,29 +172,32 @@ class UpdateScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            if (formkey.currentState!.validate()) {
-                              ///////////////////////////////////////////
-                              adduserDetails(
-                                  nameEditController.text.trim(),
-                                  int.parse(ageEditController.text.trim()),
-                                  int.parse(
-                                      phoneNumberEditController.text.trim()),
-                                  placeEditController.text.trim(),
-                                  context.read<AuthProvider>().imageAvtr);
+                            updateuserDetails(
+                                dataQ.id,
+                                nameEditController.text.trim(),
+                                ageEditController.text.trim(),
+                                phoneNumberEditController.text.trim(),
+                                placeEditController.text.trim(),
+                                context.read<AuthProvider>().imageAvtr);
+                            ///////////////////////////////////////////
+                            // adduserDetails(
+                            //     nameEditController.text.trim(),
+                            //     int.parse(ageEditController.text.trim()),
+                            //     int.parse(
+                            //         phoneNumberEditController.text.trim()),
+                            //     placeEditController.text.trim(),
+                            //     context.read<AuthProvider>().imageAvtr);
+                            ///////////////////////////////////////////
 
-                              ///////////////////////////////////////////
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Updating Data'),
+                              ),
+                            );
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Processing Data'),
-                                ),
-                              );
-
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
-                              context.read<AuthProvider>().imageAvtr = '';
-                            }
-                            //  onAddStudentButtonClicked(context);
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const HomeScreen()));
+                            context.read<AuthProvider>().imageAvtr = '';
                           },
                           child: const Text('Edit Profile'),
                         ),
@@ -198,6 +207,44 @@ class UpdateScreen extends StatelessWidget {
                 ))
           ]),
         ),
+      ),
+    );
+  }
+
+  Widget imageUpdateprofile() {
+    return Consumer<AuthProvider>(
+      builder: (context, value, child) => Stack(
+        children: [
+          dataQ['image'] == ''
+              ? Image.network(
+                  "https://pbs.twimg.com/media/Dm1neA0X4AEMmnR.jpg:large",
+                  fit: BoxFit.contain,
+                  height: 250,
+                  width: 250,
+                )
+              : Image.memory(
+                  const Base64Decoder().convert(dataQ['image']),
+                  width: 250,
+                  height: 250,
+                  fit: BoxFit.cover,
+                ),
+          Positioned(
+            left: 50,
+            right: 50,
+            top: 170,
+            bottom: 0,
+            // padding: const EdgeInsets.only(top: 150, left: 150),
+            child: IconButton(
+                onPressed: () {
+                  context.read<AuthProvider>().showBottomSheetUI(context);
+                },
+                icon: const Icon(
+                  Icons.camera_alt,
+                  color: Colors.black,
+                  size: 40,
+                )),
+          )
+        ],
       ),
     );
   }

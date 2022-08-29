@@ -6,7 +6,7 @@ import 'package:one_firebase/controller/auth_provider.dart';
 import 'package:one_firebase/view/add/view_model/image_profile.dart';
 import 'package:one_firebase/view/add/view_model/user_details_firebase.dart';
 import 'package:one_firebase/view/home/home_screen.dart';
-import 'package:one_firebase/login/main_screen.dart';
+import 'package:one_firebase/auth_screen/view/main_screen.dart';
 import 'package:provider/provider.dart';
 
 class ScreenAdd extends StatefulWidget {

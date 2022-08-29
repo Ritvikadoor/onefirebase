@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         final dataQ = snapshot.data!.docs[index];
-
+                        //final id = snapshot.data!.docs[index];
                         return GestureDetector(
                           child: Column(
                             children: [

@@ -11,7 +11,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        // child: Container(color: Colors.red),
         child: Center(
           child: Column(
             children: [
@@ -29,13 +28,6 @@ class MainScreen extends StatelessWidget {
                 },
                 child: const Text('Email/Password Login in'),
               ),
-              // ElevatedButton(
-              //   onPressed: () {
-              //     Navigator.of(context).push(MaterialPageRoute(
-              //         builder: ((context) => const PhoneSigin())));
-              //   },
-              //   child: const Text('Phone Sign in'),
-              // ),
               ElevatedButton(
                   child: const Text('Google Sign in'),
                   onPressed: () => Navigator.of(context).push(
@@ -44,15 +36,6 @@ class MainScreen extends StatelessWidget {
                   child: const Text('Google Sign Up'),
                   onPressed: () => Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => GoogleSignUp())))
-
-              // ElevatedButton(
-              //   onPressed: () {},
-              //   child: const Text('Facebook Sign in'),
-              // ),
-              // ElevatedButton(
-              //   onPressed: () {},
-              //   child: const Text('Anonymous Sign in'),
-              // ),
             ],
           ),
         ),
