@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:one_firebase/view/add/provider/img_provider.dart';
 import 'package:provider/provider.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -163,9 +162,6 @@ class AuthProvider extends ChangeNotifier {
 // context.read<AuthProvider>().changeImage(encode);
   }
 
-  // Future getDocID() async {
-  //   FirebaseFirestore.instance.collection(FirebaseAuth.instance.currentUser!.email.toString());
-  // }
   updateData(
       {required BuildContext context,
       required String imageQ,
@@ -174,11 +170,8 @@ class AuthProvider extends ChangeNotifier {
       required String email,
       required String password,
       required String documentQ}) {
-    String finalImage = context.read<AuthProvider>().imageAvtr.trim().isEmpty
-        ? imageQ
-        : context.read<AuthProvider>().imageAvtr;
     FirebaseFirestore.instance.collection(email).doc(documentQ).set({
-      'image': finalImage,
+      'image': imageAvtr,
       'phone': phone,
       'name': name,
       'email': email,

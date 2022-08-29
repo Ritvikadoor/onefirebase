@@ -1,11 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:one_firebase/controller/auth_provider.dart';
-import 'package:one_firebase/view/add/view_model/image_profile.dart';
 import 'package:one_firebase/view/add/view_model/user_details_firebase.dart';
 import 'package:one_firebase/view/home/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -28,14 +25,17 @@ class UpdateScreen extends StatelessWidget {
     ageEditController.text = dataQ['age'].toString();
     phoneNumberEditController.text = dataQ['number'].toString();
     placeEditController.text = dataQ['place'];
-    imgString = dataQ['image'];
+    context.read<AuthProvider>().imageAvtr = dataQ['image'];
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
         actions: [
           IconButton(
-              onPressed: () => context.read<AuthProvider>().signOut(),
+              onPressed: () {
+                context.read<AuthProvider>().signOut();
+                Navigator.of(context).pop();
+              },
               icon: const Icon(Icons.logout))
         ],
       ),
@@ -223,7 +223,8 @@ class UpdateScreen extends StatelessWidget {
                   width: 250,
                 )
               : Image.memory(
-                  const Base64Decoder().convert(dataQ['image']),
+                  const Base64Decoder()
+                      .convert(context.read<AuthProvider>().imageAvtr),
                   width: 250,
                   height: 250,
                   fit: BoxFit.cover,

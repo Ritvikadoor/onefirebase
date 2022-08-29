@@ -46,9 +46,10 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdateScreen(dataQ: dataQ)));
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UpdateScreen(dataQ: dataQ)));
                                 },
                                 child: ListTile(
                                   title: Text(dataQ['name']),
