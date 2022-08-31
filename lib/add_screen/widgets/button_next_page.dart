@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/view/home/home_screen.dart';
+import 'package:one_firebase/home_screen/home_screen.dart';
 
 class ButtonNextPage extends StatelessWidget {
   const ButtonNextPage({

@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:one_firebase/controller/auth_provider.dart';
-import 'package:one_firebase/view/add/view_model/user_details_firebase.dart';
-import 'package:one_firebase/view/home/home_screen.dart';
+import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
+import 'package:one_firebase/add_screen/viewmodel/user_details_firebase.dart';
+import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class UpdateScreen extends StatelessWidget {

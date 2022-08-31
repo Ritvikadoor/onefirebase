@@ -3,12 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:one_firebase/constant.dart';
-import 'package:one_firebase/controller/auth_provider.dart';
-import 'package:one_firebase/view/add/view_model/image_profile.dart';
-import 'package:one_firebase/view/add/view_model/user_details_firebase.dart';
-import 'package:one_firebase/view/add/widgets/add_profile_heading.dart';
-import 'package:one_firebase/view/add/widgets/button_next_page.dart';
-import 'package:one_firebase/view/home/home_screen.dart';
+import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
+import 'package:one_firebase/add_screen/viewmodel/image_profile.dart';
+import 'package:one_firebase/add_screen/viewmodel/user_details_firebase.dart';
+import 'package:one_firebase/add_screen/widgets/add_profile_heading.dart';
+import 'package:one_firebase/add_screen/widgets/button_next_page.dart';
+import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:one_firebase/auth_screen/view/main_screen.dart';
 import 'package:provider/provider.dart';
 

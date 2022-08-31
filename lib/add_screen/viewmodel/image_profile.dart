@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:one_firebase/controller/auth_provider.dart';
+import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 Widget imageprofile() {

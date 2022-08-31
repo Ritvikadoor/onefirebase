@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:one_firebase/controller/auth_provider.dart';
+import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/routes/routs.dart';
-import 'package:one_firebase/view/add/profile.dart';
+import 'package:one_firebase/add_screen/view/profile.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

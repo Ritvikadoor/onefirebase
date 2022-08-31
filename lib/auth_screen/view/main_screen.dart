@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_firebase/auth_screen/widgets/custom_button.dart';
-import 'package:one_firebase/login/google_signin.dart';
-import 'package:one_firebase/login/google_signup.dart';
-import 'package:one_firebase/login/signin_screen.dart';
-import 'package:one_firebase/login/signup_screen.dart';
+import 'package:one_firebase/login/presentation/google_signin.dart';
+import 'package:one_firebase/login/presentation/google_signup.dart';
+import 'package:one_firebase/login/presentation/signin_screen.dart';
+import 'package:one_firebase/login/presentation/signup_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 
 class MainScreen extends StatelessWidget {

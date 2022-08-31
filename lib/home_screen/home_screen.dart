@@ -3,9 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:one_firebase/constant.dart';
-import 'package:one_firebase/controller/auth_provider.dart';
-import 'package:one_firebase/view/add/profile.dart';
-import 'package:one_firebase/view/update/update_screen.dart';
+import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
+import 'package:one_firebase/add_screen/view/profile.dart';
+import 'package:one_firebase/update_screen/update_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {

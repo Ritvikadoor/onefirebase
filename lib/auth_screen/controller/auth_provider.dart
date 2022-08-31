@@ -161,21 +161,4 @@ class AuthProvider extends ChangeNotifier {
 
 // context.read<AuthProvider>().changeImage(encode);
   }
-
-  updateData(
-      {required BuildContext context,
-      required String imageQ,
-      required String phone,
-      required String name,
-      required String email,
-      required String password,
-      required String documentQ}) {
-    FirebaseFirestore.instance.collection(email).doc(documentQ).set({
-      'image': imageAvtr,
-      'phone': phone,
-      'name': name,
-      'email': email,
-      'password': password,
-    });
-  }
 }

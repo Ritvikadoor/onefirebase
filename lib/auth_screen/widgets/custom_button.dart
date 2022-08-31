@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/login/signup_screen.dart';
+import 'package:one_firebase/login/presentation/signup_screen.dart';
 
 Widget customButton(BuildContext context, String text, IconData icon) {
   return Padding(
