@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:one_firebase/controller/auth_provider.dart';
+import 'package:one_firebase/routes/routs.dart';
 import 'package:one_firebase/view/add/profile.dart';
 import 'package:provider/provider.dart';
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
             initialData: null)
       ],
       child: MaterialApp(
+        navigatorKey: RoutesProvider.navigatorKey,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,

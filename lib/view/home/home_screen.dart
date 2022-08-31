@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => ScreenAdd())),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       appBar: AppBar(
         actions: [

@@ -9,7 +9,7 @@ Widget imageprofile() {
       children: [
         value.imageAvtr.trim().isEmpty
             ? Image.network(
-                "https://pbs.twimg.com/media/Dm1neA0X4AEMmnR.jpg:large",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTb8BlqSdIUw4FHxjvv1-q0o1L80gVBEYTKVnUr7g-vHvJGsdH-51TlaTd6qyP_qMNE1I&usqp=CAU",
                 fit: BoxFit.contain,
                 height: 250,
                 width: 250,

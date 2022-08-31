@@ -179,16 +179,6 @@ class UpdateScreen extends StatelessWidget {
                                 phoneNumberEditController.text.trim(),
                                 placeEditController.text.trim(),
                                 context.read<AuthProvider>().imageAvtr);
-                            ///////////////////////////////////////////
-                            // adduserDetails(
-                            //     nameEditController.text.trim(),
-                            //     int.parse(ageEditController.text.trim()),
-                            //     int.parse(
-                            //         phoneNumberEditController.text.trim()),
-                            //     placeEditController.text.trim(),
-                            //     context.read<AuthProvider>().imageAvtr);
-                            ///////////////////////////////////////////
-
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Updating Data'),

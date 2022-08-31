@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:one_firebase/auth_screen/widgets/custom_button.dart';
 import 'package:one_firebase/login/google_signin.dart';
 import 'package:one_firebase/login/google_signup.dart';
 import 'package:one_firebase/login/signin_screen.dart';
 import 'package:one_firebase/login/signup_screen.dart';
+import 'package:one_firebase/routes/routs.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -11,31 +13,40 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => const SignUpEmailPassword())));
+              const Text("How you would like to join with Us"),
+              InkWell(
+                child: customButton(context, 'Sign Up', Icons.account_box),
+                onTap: () {
+                  RoutesProvider.nextScreen(
+                      screen: const SignUpEmailPassword());
                 },
-                child: const Text('Email/Password Sign Up'),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: ((context) => const EmailPasswordLogin())));
+              InkWell(
+                child: customButton(
+                    context, 'Sign In', Icons.account_circle_outlined),
+                onTap: () {
+                  RoutesProvider.nextScreen(screen: const EmailPasswordLogin());
                 },
-                child: const Text('Email/Password Login in'),
               ),
-              ElevatedButton(
-                  child: const Text('Google Sign in'),
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => GoogleSignIn()))),
-              ElevatedButton(
-                  child: const Text('Google Sign Up'),
-                  onPressed: () => Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => GoogleSignUp())))
+              InkWell(
+                child: customButton(
+                    context, 'Google Sign In', Icons.now_widgets_outlined),
+                onTap: () {
+                  RoutesProvider.nextScreen(screen: const GoogleSignIn());
+                },
+              ),
+              InkWell(
+                child: customButton(
+                    context, 'Google Sign Up', Icons.widgets_sharp),
+                onTap: () {
+                  RoutesProvider.nextScreen(screen: const GoogleSignUp());
+                },
+              ),
             ],
           ),
         ),

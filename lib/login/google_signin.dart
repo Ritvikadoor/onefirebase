@@ -24,22 +24,24 @@ class _GoogleSignInState extends State<GoogleSignIn> {
     final authProvider = context.watch<AuthProvider>();
 
     return Scaffold(
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text(
-          'Google Sign-in',
-          style: TextStyle(fontSize: 30),
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.08,
-        ),
-        const SizedBox(height: 20),
-        if (authProvider.isLoading) const CircularProgressIndicator(),
-        if (!authProvider.isLoading)
-          ElevatedButton(
-            onPressed: () => googlSigningIn(authProvider),
-            child: const Text('Google Sign in'),
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text(
+            'Google Sign-in',
+            style: TextStyle(fontSize: 30),
           ),
-      ]),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.08,
+          ),
+          const SizedBox(height: 20),
+          if (authProvider.isLoading) const CircularProgressIndicator(),
+          if (!authProvider.isLoading)
+            ElevatedButton(
+              onPressed: () => googlSigningIn(authProvider),
+              child: const Text('Google Sign in'),
+            ),
+        ]),
+      ),
     );
   }
 }

@@ -2,9 +2,12 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:one_firebase/constant.dart';
 import 'package:one_firebase/controller/auth_provider.dart';
 import 'package:one_firebase/view/add/view_model/image_profile.dart';
 import 'package:one_firebase/view/add/view_model/user_details_firebase.dart';
+import 'package:one_firebase/view/add/widgets/add_profile_heading.dart';
+import 'package:one_firebase/view/add/widgets/button_next_page.dart';
 import 'package:one_firebase/view/home/home_screen.dart';
 import 'package:one_firebase/auth_screen/view/main_screen.dart';
 import 'package:provider/provider.dart';
@@ -63,21 +66,12 @@ class _ScreenAddState extends State<ScreenAdd> {
                       key: formkey,
                       child: Column(
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.only(left: 10, top: 20),
-                            child: Text(
-                              'ADD PROFILE',
-                              style: TextStyle(
-                                  fontSize: 40, fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          const HeadingAddProfile(),
                           Center(child: Consumer<AuthProvider>(
                               builder: (context, balue, _) {
                             return ClipOval(child: imageprofile());
                           })),
-                          const SizedBox(
-                            height: 40,
-                          ),
+                          height40,
                           Container(
                             decoration: BoxDecoration(
                                 color: const Color.fromARGB(255, 219, 219, 219),
@@ -192,7 +186,6 @@ class _ScreenAddState extends State<ScreenAdd> {
                                 ),
                                 onPressed: () {
                                   if (formkey.currentState!.validate()) {
-                                    ///////////////////////////////////////////
                                     adduserDetails(
                                         nameController.text.trim(),
                                         int.parse(ageController.text.trim()),
@@ -200,9 +193,6 @@ class _ScreenAddState extends State<ScreenAdd> {
                                             phoneNumberController.text.trim()),
                                         placeController.text.trim(),
                                         context.read<AuthProvider>().imageAvtr);
-
-                                    ///////////////////////////////////////////
-
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                         content: Text('Processing Data'),
@@ -215,29 +205,10 @@ class _ScreenAddState extends State<ScreenAdd> {
                                                 const HomeScreen()));
                                     context.read<AuthProvider>().imageAvtr = '';
                                   }
-                                  //  onAddStudentButtonClicked(context);
                                 },
                                 child: const Text('Add Profile'),
                               ),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.black),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HomeScreen()));
-                                  //  onAddStudentButtonClicked(context);
-                                },
-                                child: const Text('Next Page'),
-                              ),
+                              const ButtonNextPage(),
                             ],
                           )
                         ],
@@ -248,7 +219,4 @@ class _ScreenAddState extends State<ScreenAdd> {
           );
         });
   }
-
-  // Future<void> takecamera(BuildContext context) async {
-
 }

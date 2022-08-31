@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:one_firebase/constant.dart';
-import 'package:provider/provider.dart';
 
 class GetUserData extends StatelessWidget {
   QueryDocumentSnapshot<Object?> dataQ;
