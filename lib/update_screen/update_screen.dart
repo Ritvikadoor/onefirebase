@@ -73,7 +73,7 @@ class UpdateScreen extends StatelessWidget {
                             TextFormField(
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'Name is required';
                                 }
                                 return null;
                               },
@@ -93,7 +93,7 @@ class UpdateScreen extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'Age is required';
                                 }
                                 return null;
                               },
@@ -113,7 +113,7 @@ class UpdateScreen extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'Number is required';
                                 }
                                 return null;
                               },
@@ -132,7 +132,7 @@ class UpdateScreen extends StatelessWidget {
                             TextFormField(
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
+                                  return 'Place is required';
                                 }
                                 return null;
                               },
