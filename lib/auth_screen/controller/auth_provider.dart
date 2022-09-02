@@ -19,7 +19,7 @@ class AuthProvider extends ChangeNotifier {
   bool get loading => isLoading;
   Future<void> signOut() async {
     await fb.signOut();
-    RoutesProvider.removeScreenUntil(screen: const MainScreen());
+    RoutesProvider.removeScreenUntil(screen: MainScreen());
   }
 
   Future<String> signIn(String email, String password) async {

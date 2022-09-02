@@ -3,20 +3,15 @@ import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/view/profile.dart';
 import 'package:provider/provider.dart';
 
-class GoogleSignIn extends StatefulWidget {
+class GoogleSignIn extends StatelessWidget {
   const GoogleSignIn({Key? key}) : super(key: key);
 
-  @override
-  State<GoogleSignIn> createState() => _GoogleSignInState();
-}
-
-class _GoogleSignInState extends State<GoogleSignIn> {
-  void googlSigningIn(AuthProvider provider) async {
+  void googlSigningIn(AuthProvider provider, BuildContext context) async {
     final msg = await provider.googleSignIn().then((value) =>
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => ScreenAdd())));
     if (msg == '') return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   @override
@@ -37,7 +32,7 @@ class _GoogleSignInState extends State<GoogleSignIn> {
           if (authProvider.isLoading) const CircularProgressIndicator(),
           if (!authProvider.isLoading)
             ElevatedButton(
-              onPressed: () => googlSigningIn(authProvider),
+              onPressed: () => googlSigningIn(authProvider, context),
               child: const Text('Google Sign in'),
             ),
         ]),

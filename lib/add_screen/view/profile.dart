@@ -8,6 +8,7 @@ import 'package:one_firebase/add_screen/viewmodel/image_profile.dart';
 import 'package:one_firebase/add_screen/viewmodel/user_details_firebase.dart';
 import 'package:one_firebase/add_screen/widgets/add_profile_heading.dart';
 import 'package:one_firebase/add_screen/widgets/button_next_page.dart';
+import 'package:one_firebase/get_started/get_started_screen.dart';
 import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:one_firebase/auth_screen/view/main_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
@@ -49,7 +50,7 @@ class _ScreenAddState extends State<ScreenAdd> {
     return StreamBuilder<User?>(
         stream: context.read<AuthProvider>().stream(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) return const MainScreen();
+          if (!snapshot.hasData) return const GetStarted();
           return WillPopScope(
             onWillPop: () async {
               return false;
