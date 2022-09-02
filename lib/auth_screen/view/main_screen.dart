@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
                 child: customButton(
                     context, 'Sign In', Icons.account_circle_outlined),
                 onTap: () {
-                  RoutesProvider.nextScreen(screen: const EmailPasswordLogin());
+                  RoutesProvider.nextScreen(screen: EmailPasswordLogin());
                 },
               ),
               InkWell(

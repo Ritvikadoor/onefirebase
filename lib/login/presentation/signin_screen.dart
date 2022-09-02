@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/view/profile.dart';
+import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
-class EmailPasswordLogin extends StatefulWidget {
-  const EmailPasswordLogin({Key? key}) : super(key: key);
+class EmailPasswordLogin extends StatelessWidget {
+  EmailPasswordLogin({Key? key}) : super(key: key);
 
-  @override
-  State<EmailPasswordLogin> createState() => _EmailPasswordLoginState();
-}
-
-class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
   final TextEditingController emailSignInController = TextEditingController();
   final TextEditingController passwordSignInController =
       TextEditingController();
-  @override
-  void dispose() {
-    emailSignInController.dispose();
-    passwordSignInController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   emailSignInController.dispose();
+  //   passwordSignInController.dispose();
+  //   super.dispose();
+  // }
 
-  void singIn(AuthProvider provider) async {
+  void singIn(AuthProvider provider, BuildContext context) async {
     final msg = await provider
         .signIn(emailSignInController.text, passwordSignInController.text)
-        .then((value) => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ScreenAdd())));
+        .then((value) => RoutesProvider.removeScreen(screen: ScreenAdd()));
+
     if (msg == '') return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
@@ -68,7 +64,7 @@ class _EmailPasswordLoginState extends State<EmailPasswordLogin> {
         if (authProvider.isLoading) const CircularProgressIndicator(),
         if (!authProvider.isLoading)
           ElevatedButton(
-            onPressed: () => singIn(authProvider),
+            onPressed: () => singIn(authProvider, context),
             child: const Text('Sign in'),
           ),
       ]),
