@@ -10,7 +10,6 @@ import 'package:one_firebase/add_screen/widgets/add_profile_heading.dart';
 import 'package:one_firebase/add_screen/widgets/button_next_page.dart';
 import 'package:one_firebase/get_started/get_started_screen.dart';
 import 'package:one_firebase/home_screen/home_screen.dart';
-import 'package:one_firebase/auth_screen/view/main_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 

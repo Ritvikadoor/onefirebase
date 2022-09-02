@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/auth_screen/view/main_screen.dart';
+import 'package:one_firebase/login/presentation/signin_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 
 class GetStarted extends StatelessWidget {
@@ -10,12 +10,12 @@ class GetStarted extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(
-            height: 300,
+          Container(
+            height: 400,
           ),
           ElevatedButton(
               onPressed: () =>
-                  RoutesProvider.nextScreen(screen: const MainScreen()),
+                  RoutesProvider.nextScreen(screen: EmailPasswordLogin()),
               child: const Text("Continue"))
         ],
       ),

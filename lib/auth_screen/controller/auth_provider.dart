@@ -1,12 +1,11 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:one_firebase/auth_screen/view/main_screen.dart';
+import 'package:one_firebase/login/presentation/signin_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,7 @@ class AuthProvider extends ChangeNotifier {
   bool get loading => isLoading;
   Future<void> signOut() async {
     await fb.signOut();
-    RoutesProvider.removeScreenUntil(screen: MainScreen());
+    RoutesProvider.removeScreenUntil(screen: EmailPasswordLogin());
   }
 
   Future<String> signIn(String email, String password) async {
