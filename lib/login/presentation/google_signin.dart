@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/view/profile.dart';
+import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
+import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
 class GoogleSignIn extends StatelessWidget {
@@ -9,7 +10,7 @@ class GoogleSignIn extends StatelessWidget {
   void googlSigningIn(AuthProvider provider, BuildContext context) async {
     final msg = await provider.googleSignIn().then((value) =>
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ScreenAdd())));
+            .push(MaterialPageRoute(builder: (context) => const HomeScreen())));
     if (msg == '') return;
     //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }

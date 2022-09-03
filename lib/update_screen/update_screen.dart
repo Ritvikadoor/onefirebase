@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/viewmodel/user_details_firebase.dart';
+import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -207,7 +207,7 @@ class UpdateScreen extends StatelessWidget {
         children: [
           dataQ['image'] == ''
               ? Image.network(
-                  "https://pbs.twimg.com/media/Dm1neA0X4AEMmnR.jpg:large",
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTb8BlqSdIUw4FHxjvv1-q0o1L80gVBEYTKVnUr7g-vHvJGsdH-51TlaTd6qyP_qMNE1I&usqp=CAU",
                   fit: BoxFit.contain,
                   height: 250,
                   width: 250,

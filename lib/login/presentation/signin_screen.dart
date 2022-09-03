@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/view/profile.dart';
-import 'package:one_firebase/auth_screen/widgets/custom_button.dart';
+import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/constant.dart';
+import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:one_firebase/login/presentation/google_signin.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_firebase/login/presentation/signup_screen.dart';
@@ -27,7 +27,7 @@ class EmailPasswordLogin extends StatelessWidget {
   void singIn(AuthProvider provider, BuildContext context) async {
     final msg = await provider
         .signIn(emailSignInController.text, passwordSignInController.text)
-        .then((value) => RoutesProvider.removeScreen(screen: ScreenAdd()));
+        .then((value) => RoutesProvider.removeScreen(screen: HomeScreen()));
 
     if (msg == '') return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
@@ -115,7 +115,7 @@ class EmailPasswordLogin extends StatelessWidget {
                         TextButton(
                           onPressed: () {
                             RoutesProvider.nextScreen(
-                                screen: const SignUpEmailPassword());
+                                screen: SignUpEmailPassword());
                           },
                           child: const Text(
                             'Sign Up',
