@@ -11,8 +11,12 @@ class GetStarted extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            height: 400,
-          ),
+              height: 400,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                image: NetworkImage(""),
+                fit: BoxFit.fill,
+              ))),
           ElevatedButton(
               onPressed: () =>
                   RoutesProvider.nextScreen(screen: EmailPasswordLogin()),

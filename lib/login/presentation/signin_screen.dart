@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:one_firebase/auth_screen/controller/auth_provider.dart';
 import 'package:one_firebase/add_screen/view/profile.dart';
 import 'package:one_firebase/auth_screen/widgets/custom_button.dart';
+import 'package:one_firebase/constant.dart';
 import 'package:one_firebase/login/presentation/google_signin.dart';
-import 'package:one_firebase/login/presentation/google_signup.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_firebase/login/presentation/signup_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
 class EmailPasswordLogin extends StatelessWidget {
   EmailPasswordLogin({Key? key}) : super(key: key);
+  final formkey = GlobalKey<FormState>();
 
   final TextEditingController emailSignInController = TextEditingController();
   final TextEditingController passwordSignInController =
       TextEditingController();
+
   // @override
   // void dispose() {
   //   emailSignInController.dispose();
@@ -33,7 +36,6 @@ class EmailPasswordLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
-
     return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         const Text(
@@ -45,79 +47,133 @@ class EmailPasswordLogin extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Container(
-            height: 300,
-            decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextFormField(
-                      controller: emailSignInController,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.email),
-                        hintText: 'Enter your email',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextFormField(
-                      controller: passwordSignInController,
-                      decoration: const InputDecoration(
-                        icon: Icon(Icons.password),
-                        hintText: 'Enter your Password',
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  if (authProvider.isLoading) const CircularProgressIndicator(),
-                  if (!authProvider.isLoading)
-                    ElevatedButton(
-                      onPressed: () => singIn(authProvider, context),
-                      child: const Text('Sign in'),
-                    ),
-                  Row(
-                    children: [
-                      const SizedBox(
-                        width: 90,
-                      ),
-                      const Text('Do you have an Account?'),
-                      TextButton(
-                        onPressed: () {
-                          RoutesProvider.nextScreen(
-                              screen: const SignUpEmailPassword());
-                        },
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(color: Colors.red),
+          child: Form(
+            key: formkey,
+            child: Container(
+              height: 330,
+              decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(15)),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Email is required";
+                            }
+                            return null;
+                          },
+                          controller: emailSignInController,
+                          decoration: const InputDecoration(
+                            icon: Icon(Icons.email),
+                            hintText: 'Enter your email',
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                ],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Password is required";
+                          }
+                          return null;
+                        },
+                        controller: passwordSignInController,
+                        decoration: const InputDecoration(
+                          icon: Icon(Icons.password),
+                          hintText: 'Enter your Password',
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    if (authProvider.isLoading)
+                      const CircularProgressIndicator(),
+                    if (!authProvider.isLoading)
+                      ElevatedButton(
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            singIn(authProvider, context);
+                          }
+                        },
+                        child: const Text('Sign in'),
+                      ),
+                    Row(
+                      children: [
+                        const SizedBox(
+                          width: 90,
+                        ),
+                        const Text('Do you have an Account?'),
+                        TextButton(
+                          onPressed: () {
+                            RoutesProvider.nextScreen(
+                                screen: const SignUpEmailPassword());
+                          },
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: InkWell(
-            child: customButton(
-                context, 'Google Sign In', Icons.now_widgets_outlined),
-            onTap: () {
-              RoutesProvider.nextScreen(screen: const GoogleSignIn());
-            },
-          ),
-        ),
+        height40,
         InkWell(
-          child: customButton(context, 'Sign Up', Icons.account_box),
-          onTap: () {},
-        ),
+          onTap: () {
+            RoutesProvider.nextScreen(screen: const GoogleSignIn());
+          },
+          child: Ink(
+            decoration: BoxDecoration(
+                color: Colors.transparent,
+                borderRadius: BorderRadius.circular(20)),
+            child: Padding(
+              padding: const EdgeInsets.all(6),
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white,
+                    child: ClipOval(
+                      //   borderRadius: BorderRadius.circular(40),
+                      child: Image.asset(
+                        "lib/assets/googlelogo.webp",
+                        width: 50,
+                        height: 60,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  const Text('Sign in with Google'),
+                ],
+              ),
+            ),
+          ),
+        )
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 40),
+        //   child: InkWell(
+        //     child: customButton(
+        //         context, 'Google Sign In', Icons.now_widgets_outlined),
+        //     onTap: () {
+        //
+        //     },
+        //   ),
+        // ),
       ]),
     );
   }

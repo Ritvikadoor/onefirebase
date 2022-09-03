@@ -13,14 +13,9 @@ import 'package:one_firebase/home_screen/home_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
-class ScreenAdd extends StatefulWidget {
+class ScreenAdd extends StatelessWidget {
   ScreenAdd({Key? key}) : super(key: key);
 
-  @override
-  State<ScreenAdd> createState() => _ScreenAddState();
-}
-
-class _ScreenAddState extends State<ScreenAdd> {
   final formkey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
