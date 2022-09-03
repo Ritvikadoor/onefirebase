@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:one_firebase/constant.dart';
@@ -8,7 +7,6 @@ import 'package:one_firebase/model/user_details_firebase.dart';
 import 'package:one_firebase/view/add_screen/widgets/add_profile_heading.dart';
 import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/view/home_screen/home_screen.dart';
-import 'package:one_firebase/view/login_screen/signin_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
@@ -31,6 +29,7 @@ class ScreenAdd extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AuthProvider>().imageAvtr = '';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,

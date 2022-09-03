@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/view/add_screen/profile.dart';
 import 'package:one_firebase/constant.dart';
 import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/view/home_screen/home_screen.dart';
 import 'package:one_firebase/view/google_signin/google_signin.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:one_firebase/view/signup_screen/signup_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
@@ -17,20 +15,14 @@ class EmailPasswordLogin extends StatelessWidget {
   final TextEditingController passwordSignInController =
       TextEditingController();
 
-  // @override
-  // void dispose() {
-  //   emailSignInController.dispose();
-  //   passwordSignInController.dispose();
-  //   super.dispose();
-  // }
-
   void singIn(AuthProvider provider, BuildContext context) async {
     final msg = await provider
         .signIn(emailSignInController.text, passwordSignInController.text)
-        .then((value) => RoutesProvider.removeScreen(screen: HomeScreen()));
+        .then(
+            (value) => RoutesProvider.removeScreen(screen: const HomeScreen()));
 
     if (msg == '') return;
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   @override
@@ -164,16 +156,6 @@ class EmailPasswordLogin extends StatelessWidget {
             ),
           ),
         )
-        // Padding(
-        //   padding: const EdgeInsets.only(top: 40),
-        //   child: InkWell(
-        //     child: customButton(
-        //         context, 'Google Sign In', Icons.now_widgets_outlined),
-        //     onTap: () {
-        //
-        //     },
-        //   ),
-        // ),
       ]),
     );
   }

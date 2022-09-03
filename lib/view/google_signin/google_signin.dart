@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/view/add_screen/profile.dart';
 import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/view/home_screen/home_screen.dart';
 import 'package:provider/provider.dart';

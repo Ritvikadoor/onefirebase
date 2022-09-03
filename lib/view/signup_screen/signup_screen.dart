@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/view/add_screen/profile.dart';
 import 'package:one_firebase/constant.dart';
 import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
 import 'package:one_firebase/view/home_screen/home_screen.dart';
@@ -15,12 +14,6 @@ class SignUpEmailPassword extends StatelessWidget {
   final TextEditingController emailSignUpController = TextEditingController();
   final TextEditingController passwordSignUpController =
       TextEditingController();
-  // @override
-  // void dispose() {
-  //   emailSignUpController.dispose();
-  //   passwordSignUpController.dispose();
-  //   super.dispose();
-  // }
 
   void singUp(AuthProvider provider, BuildContext context) async {
     final msg = await provider
