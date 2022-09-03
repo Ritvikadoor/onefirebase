@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/add_screen/view/profile.dart';
-import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
-import 'package:one_firebase/home_screen/home_screen.dart';
-import 'package:one_firebase/login/presentation/signin_screen.dart';
+import 'package:one_firebase/view/add_screen/profile.dart';
+import 'package:one_firebase/constant.dart';
+import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
+import 'package:one_firebase/view/home_screen/home_screen.dart';
+import 'package:one_firebase/view/login_screen/signin_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +25,8 @@ class SignUpEmailPassword extends StatelessWidget {
   void singUp(AuthProvider provider, BuildContext context) async {
     final msg = await provider
         .signUp(emailSignUpController.text, passwordSignUpController.text)
-        .then(
-            (value) => RoutesProvider.removeScreenUntil(screen: HomeScreen()));
+        .then((value) =>
+            RoutesProvider.removeScreenUntil(screen: const HomeScreen()));
     if (msg == '') return;
     //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
@@ -46,7 +47,7 @@ class SignUpEmailPassword extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Container(
-            height: 330,
+            height: 350,
             decoration: BoxDecoration(
                 color: Colors.grey.shade300,
                 borderRadius: BorderRadius.circular(15)),
@@ -54,6 +55,7 @@ class SignUpEmailPassword extends StatelessWidget {
               key: formkey,
               child: Column(
                 children: [
+                  height20,
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextFormField(
@@ -65,11 +67,12 @@ class SignUpEmailPassword extends StatelessWidget {
                       },
                       controller: nameController,
                       decoration: const InputDecoration(
-                        icon: Icon(Icons.email),
+                        icon: Icon(Icons.person),
                         hintText: 'Enter your Name',
                       ),
                     ),
                   ),
+                  height20,
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextFormField(

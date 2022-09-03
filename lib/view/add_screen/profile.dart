@@ -1,43 +1,39 @@
-import 'dart:convert';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:one_firebase/add_screen/viewmodel/user_details_firebase.dart';
-import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
-import 'package:one_firebase/home_screen/home_screen.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:one_firebase/constant.dart';
+import 'package:one_firebase/model/image_profile.dart';
+import 'package:one_firebase/model/user_details_firebase.dart';
+import 'package:one_firebase/view/add_screen/widgets/add_profile_heading.dart';
+import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
+import 'package:one_firebase/view/home_screen/home_screen.dart';
+import 'package:one_firebase/view/login_screen/signin_screen.dart';
+import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 
-class UpdateScreen extends StatelessWidget {
-  UpdateScreen({Key? key, required this.dataQ}) : super(key: key);
-  final QueryDocumentSnapshot<Object?> dataQ;
+class ScreenAdd extends StatelessWidget {
+  ScreenAdd({Key? key}) : super(key: key);
+
   final formkey = GlobalKey<FormState>();
 
-  TextEditingController nameEditController = TextEditingController();
-  TextEditingController ageEditController = TextEditingController();
+  final nameController = TextEditingController();
 
-  TextEditingController phoneNumberEditController = TextEditingController();
-  TextEditingController placeEditController = TextEditingController();
-  String? imgString;
+  final ageController = TextEditingController();
+
+  final phoneNumberController = TextEditingController();
+
+  final placeController = TextEditingController();
+
+  File? imagefile;
+
+  final ImagePicker picker = ImagePicker();
 
   @override
   Widget build(BuildContext context) {
-    nameEditController.text = dataQ['name'];
-    ageEditController.text = dataQ['age'].toString();
-    phoneNumberEditController.text = dataQ['number'].toString();
-    placeEditController.text = dataQ['place'];
-    context.read<AuthProvider>().imageAvtr = dataQ['image'];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black87,
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<AuthProvider>().signOut();
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(Icons.logout))
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -47,21 +43,12 @@ class UpdateScreen extends StatelessWidget {
                 key: formkey,
                 child: Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(left: 10, top: 20),
-                      child: Text(
-                        'EDIT PROFILE',
-                        style: TextStyle(
-                            fontSize: 40, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    const HeadingAddProfile(),
                     Center(child:
                         Consumer<AuthProvider>(builder: (context, balue, _) {
-                      return ClipOval(child: imageUpdateprofile());
+                      return ClipOval(child: imageprofile());
                     })),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    height40,
                     Container(
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 219, 219, 219),
@@ -73,11 +60,11 @@ class UpdateScreen extends StatelessWidget {
                             TextFormField(
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Name is required';
+                                  return 'Please enter some text';
                                 }
                                 return null;
                               },
-                              controller: nameEditController,
+                              controller: nameController,
                               decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
@@ -93,11 +80,11 @@ class UpdateScreen extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Age is required';
+                                  return 'Please enter some text';
                                 }
                                 return null;
                               },
-                              controller: ageEditController,
+                              controller: ageController,
                               decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
@@ -113,11 +100,11 @@ class UpdateScreen extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Number is required';
+                                  return 'Please enter some text';
                                 }
                                 return null;
                               },
-                              controller: phoneNumberEditController,
+                              controller: phoneNumberController,
                               decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
@@ -132,11 +119,11 @@ class UpdateScreen extends StatelessWidget {
                             TextFormField(
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Place is required';
+                                  return 'Please enter some text';
                                 }
                                 return null;
                               },
-                              controller: placeEditController,
+                              controller: placeController,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -172,24 +159,20 @@ class UpdateScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            updateuserDetails(
-                                dataQ.id,
-                                nameEditController.text.trim(),
-                                ageEditController.text.trim(),
-                                phoneNumberEditController.text.trim(),
-                                placeEditController.text.trim(),
-                                context.read<AuthProvider>().imageAvtr);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Updating Data'),
-                              ),
-                            );
+                            if (formkey.currentState!.validate()) {
+                              adduserDetails(
+                                  nameController.text.trim(),
+                                  int.parse(ageController.text.trim()),
+                                  int.parse(phoneNumberController.text.trim()),
+                                  placeController.text.trim(),
+                                  context.read<AuthProvider>().imageAvtr);
 
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const HomeScreen()));
-                            context.read<AuthProvider>().imageAvtr = '';
+                              RoutesProvider.removeScreenUntil(
+                                  screen: const HomeScreen());
+                              context.read<AuthProvider>().imageAvtr = '';
+                            }
                           },
-                          child: const Text('Edit Profile'),
+                          child: const Text('Add Profile'),
                         ),
                       ],
                     )
@@ -197,45 +180,6 @@ class UpdateScreen extends StatelessWidget {
                 ))
           ]),
         ),
-      ),
-    );
-  }
-
-  Widget imageUpdateprofile() {
-    return Consumer<AuthProvider>(
-      builder: (context, value, child) => Stack(
-        children: [
-          dataQ['image'] == ''
-              ? Image.network(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTb8BlqSdIUw4FHxjvv1-q0o1L80gVBEYTKVnUr7g-vHvJGsdH-51TlaTd6qyP_qMNE1I&usqp=CAU",
-                  fit: BoxFit.contain,
-                  height: 250,
-                  width: 250,
-                )
-              : Image.memory(
-                  const Base64Decoder()
-                      .convert(context.read<AuthProvider>().imageAvtr),
-                  width: 250,
-                  height: 250,
-                  fit: BoxFit.cover,
-                ),
-          Positioned(
-            left: 50,
-            right: 50,
-            top: 170,
-            bottom: 0,
-            // padding: const EdgeInsets.only(top: 150, left: 150),
-            child: IconButton(
-                onPressed: () {
-                  context.read<AuthProvider>().showBottomSheetUI(context);
-                },
-                icon: const Icon(
-                  Icons.camera_alt,
-                  color: Colors.black,
-                  size: 40,
-                )),
-          )
-        ],
       ),
     );
   }

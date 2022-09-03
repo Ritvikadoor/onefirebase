@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:one_firebase/add_screen/view/profile.dart';
-import 'package:one_firebase/auth_controller/controller/auth_provider.dart';
+import 'package:one_firebase/view/add_screen/profile.dart';
 import 'package:one_firebase/constant.dart';
-import 'package:one_firebase/home_screen/home_screen.dart';
-import 'package:one_firebase/login/presentation/google_signin.dart';
+import 'package:one_firebase/controller/auth_controller/controller/auth_provider.dart';
+import 'package:one_firebase/view/home_screen/home_screen.dart';
+import 'package:one_firebase/view/google_signin/google_signin.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:one_firebase/login/presentation/signup_screen.dart';
+import 'package:one_firebase/view/signup_screen/signup_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 

@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:one_firebase/login/presentation/signin_screen.dart';
+import 'package:one_firebase/view/login_screen/signin_screen.dart';
 import 'package:one_firebase/routes/routs.dart';
 import 'package:provider/provider.dart';
 

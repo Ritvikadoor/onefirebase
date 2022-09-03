@@ -5,4 +5,7 @@ String tempImage =
 const height40 = SizedBox(
   height: 40,
 );
+const height20 = SizedBox(
+  height: 20,
+);
 String googleLogo = "https://blog.hubspot.com/hubfs/image8-2.jpg";
